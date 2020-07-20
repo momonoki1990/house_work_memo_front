@@ -5,7 +5,7 @@ import axios from 'axios';
 
 // axiosインスタンス作成
 const client = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? "https://sample-express-ts-app.herokuapp.com" : "http://localhost:5000"
+  baseURL: process.env.NODE_ENV === 'production' ? "https://house-work-memo-back.herokuapp.com" : "http://localhost:5000"
 });
 
 class App extends Component {
