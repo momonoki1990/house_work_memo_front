@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import Header from './components/shared/Header';
 
 // axiosインスタンス作成
 const client = axios.create({
@@ -24,16 +24,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>Respnse: Sample</p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-        </a>
+          <Header />
         </header>
       </div>
     );
