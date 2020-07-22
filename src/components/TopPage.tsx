@@ -38,9 +38,9 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#fff'
   },
   copyright: {
-    padding: '8rem 8rem',
-    backgroundColor: '#6A6A6A',
-    color: '#fff'
+    padding: '4rem 8rem',
+    backgroundColor: '#E6E6E6',
+    color: '#000'
   }
 }));
 
@@ -106,7 +106,6 @@ const TopPage: React.FC = () => {
         <Button variant="contained" color='secondary' size="large">
           <Box fontWeight="fontWeightBold">デモ版を使ってみる</Box>
         </Button>
-        
       </div>
       <div className={classes.copyright}><Typography variant='body2'>Copyright <CopyrightIcon fontSize='small' style={{ verticalAlign:'middle'}}/> naoya kumasegawa 2020</Typography></div>
     </div>

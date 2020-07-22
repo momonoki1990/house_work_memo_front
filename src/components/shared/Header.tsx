@@ -43,6 +43,7 @@ const Header: React.FC = () => {
             </Typography>
             <Typography variant="subtitle1" className={classes.links}>
               <Link to='/top' className={classes.link}>トップ</Link>
+              <Link to='/' className={classes.link}>ホーム</Link>
               <Link to='/monthly' className={classes.link}>月別</Link>
               <Link to='/daily' className={classes.link}>日別</Link>
             </Typography>
