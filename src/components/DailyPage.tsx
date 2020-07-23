@@ -41,6 +41,8 @@ const DailyPage = () => {
   let listItem = (
     <TableRow>
       <TableCell component='th' scope='row'>2020年7月22日</TableCell>
+      <TableCell align='center'>料理</TableCell>
+      <TableCell align='center'>スパイスカレー</TableCell>
       <TableCell align='center'>5時間</TableCell>
       <TableCell align='right'>
         <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
