@@ -91,14 +91,14 @@ const HomePage: React.FC = () => {
       <div className={classes.recent}>
         <Typography variant='h5'><Box fontWeight='fontWeightBold' style={{ borderBottom: '2px solid #f37053' }}>最新の入力</Box></Typography>
         <Box mt={2} p={3} style={{ backgroundColor: '#f6f6f6' }}>
-        <TableContainer component={Paper}>
-          <Table className={classes.table}>
-            <TableBody>
+          <TableContainer component={Paper}>
+            <Table className={classes.table}>
+              <TableBody>
                 {[listItem, listItem, listItem, listItem, listItem, listItem, listItem, listItem, listItem, listItem]}
-            </TableBody>
-          </Table>
+              </TableBody>
+            </Table>
           </TableContainer>
-          </Box>
+        </Box>
       </div>
     </div>
     
