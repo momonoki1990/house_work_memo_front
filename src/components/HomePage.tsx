@@ -53,6 +53,7 @@ const useStyles = makeStyles(theme => ({
 const HomePage: React.FC = () => {
   const classes = useStyles();
   const today = new Date();
+  const today_str = `${today.getFullYear()}-${('0' + (today.getMonth() + 1)).slice(-2)}-${('0' + today.getDate()).slice(-2)}`
   let listItem = (
     <TableRow>
       <TableCell component='th' scope='row'>2020年7月22日</TableCell>
@@ -62,12 +63,12 @@ const HomePage: React.FC = () => {
     </TableRow>
   );
   
-  const today_str = `${today.getFullYear()}-${('0' + (today.getMonth() + 1)).slice(-2)}-${('0' + today.getDate()).slice(-2)}`
   return (
     <div className={classes.root}>
       <div className={classes.simpleForm}>
         <Typography variant='h5'><Box fontWeight='fontWeightBold' style={{ borderBottom: '2px solid #f37053' }}>カンタン入力</Box></Typography>
         <Box mt={2} p={3} style={{ backgroundColor: '#f6f6f6' }}>
+          <TextField label='日付' type='date' defaultValue={today_str} InputLabelProps={{ shrink: true }} className={classes.calender} />
           <FormControl variant='outlined' className={classes.select}>
             <InputLabel id="demo-simple-select-label">分類</InputLabel>
             <Select
@@ -79,7 +80,6 @@ const HomePage: React.FC = () => {
               <MenuItem value={30}>Thirty</MenuItem>
             </Select>
           </FormControl>
-          <TextField label='日付' type='date' defaultValue={today_str} InputLabelProps={{ shrink: true }} className={classes.calender} />
           <TextField label='時間を入力してください' variant='outlined' className={classes.input} />
           <Box display='inline-block' mr={3} style={{ padding: '1rem 0', fontSize: '1rem' }}>時間</Box>
           <TextField label='内容を入力してください(任意)' variant='outlined' className={classes.input2} style={{ marginRight: '2rem' }}/>
