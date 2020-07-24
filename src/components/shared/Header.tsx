@@ -8,6 +8,7 @@ import TopPage from '../TopPage';
 import HomePage from '../HomePage';
 import MonthlyPage from '../MonthlyPage';
 import DailyPage from '../DailyPage';
+import HomePageContainer from '../../containers/HomePageContainer';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,7 +52,7 @@ const Header: React.FC = () => {
         </AppBar>
       </div>
       <Switch>
-        <Route exact path='/' component={HomePage} />
+        <Route exact path='/' component={HomePageContainer} />
         <Route exact path='/top' component={TopPage} />
         <Route exact path='/monthly' component={MonthlyPage} />
         <Route exact path='/daily' component={DailyPage} />

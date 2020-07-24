@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useSelector } from "react-redux";
+import { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -50,7 +52,9 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-const HomePage: React.FC = () => {
+const categorySelector = (state: any) => state.form.category;
+
+const HomePage: React.FC = (props: any) => {
   const classes = useStyles();
   const today = new Date();
   const today_str = `${today.getFullYear()}-${('0' + (today.getMonth() + 1)).slice(-2)}-${('0' + today.getDate()).slice(-2)}`
@@ -63,6 +67,13 @@ const HomePage: React.FC = () => {
     </TableRow>
   );
   
+  const category = useSelector(categorySelector);
+
+  useEffect(() => {
+    console.log("毎回実行");
+    console.log(props.form)
+  });
+
   return (
     <div className={classes.root}>
       <div className={classes.simpleForm}>
