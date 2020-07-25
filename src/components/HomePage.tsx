@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -14,6 +16,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import Paper from '@material-ui/core/Paper';
+import { DailyActions, fetchHomeWorks } from '../actions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,9 +53,14 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-const HomePage: React.FC = () => {
+const categorySelector = (state: any) => state.form.category;
+const monthSelector = (state: any) => state.daily.month;
+const homeWorksSelector = (state: any) => state.home.works;
+
+const HomePage: React.FC = (props: any) => {
   const classes = useStyles();
   const today = new Date();
+  const today_str = `${today.getFullYear()}-${('0' + (today.getMonth() + 1)).slice(-2)}-${('0' + today.getDate()).slice(-2)}`
   let listItem = (
     <TableRow>
       <TableCell component='th' scope='row'>2020年7月22日</TableCell>
@@ -62,12 +70,27 @@ const HomePage: React.FC = () => {
     </TableRow>
   );
   
-  const today_str = `${today.getFullYear()}-${('0' + (today.getMonth() + 1)).slice(-2)}-${('0' + today.getDate()).slice(-2)}`
+  const category = useSelector(categorySelector);
+  const daily_month = useSelector(monthSelector);
+  const home_works = useSelector(homeWorksSelector);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("毎回実行");
+    dispatch(fetchHomeWorks());
+  }, []);
+
+  let works = home_works.map((work: any) => (
+    <div>{work.note}</div>
+  ))
+
   return (
     <div className={classes.root}>
       <div className={classes.simpleForm}>
-        <Typography variant='h5'><Box fontWeight='fontWeightBold' style={{ borderBottom: '2px solid #f37053' }}>カンタン入力</Box></Typography>
+        <Typography variant='h5'><Box fontWeight='fontWeightBold' style={{ borderBottom: '2px solid #f37053' }}>カンタン入力{daily_month}</Box></Typography>
         <Box mt={2} p={3} style={{ backgroundColor: '#f6f6f6' }}>
+          <TextField label='日付' type='date' defaultValue={today_str} InputLabelProps={{ shrink: true }} className={classes.calender} />
           <FormControl variant='outlined' className={classes.select}>
             <InputLabel id="demo-simple-select-label">分類</InputLabel>
             <Select
@@ -79,15 +102,15 @@ const HomePage: React.FC = () => {
               <MenuItem value={30}>Thirty</MenuItem>
             </Select>
           </FormControl>
-          <TextField label='日付' type='date' defaultValue={today_str} InputLabelProps={{ shrink: true }} className={classes.calender} />
           <TextField label='時間を入力してください' variant='outlined' className={classes.input} />
           <Box display='inline-block' mr={3} style={{ padding: '1rem 0', fontSize: '1rem' }}>時間</Box>
           <TextField label='内容を入力してください(任意)' variant='outlined' className={classes.input2} style={{ marginRight: '2rem' }}/>
           <Button variant="contained" color='secondary' size="large">
-            <Box fontWeight="fontWeightBold">保存</Box>
+            <Box fontWeight="fontWeightBold" onClick={() => { dispatch(DailyActions.addMonth()) }}>保存</Box>
           </Button>
         </Box>
       </div>
+      <div>{works}</div>
       <div className={classes.recent}>
         <Typography variant='h5'><Box fontWeight='fontWeightBold' style={{ borderBottom: '2px solid #f37053' }}>最新の入力</Box></Typography>
         <Box mt={2} p={3} style={{ backgroundColor: '#f6f6f6' }}>
