@@ -8,7 +8,6 @@ import TopPage from '../TopPage';
 import HomePage from '../HomePage';
 import MonthlyPage from '../MonthlyPage';
 import DailyPage from '../DailyPage';
-//import HomePageContainer from '../../containers/HomePageContainer';
 
 const useStyles = makeStyles(theme => ({
   root: {

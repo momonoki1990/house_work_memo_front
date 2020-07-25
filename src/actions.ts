@@ -1,5 +1,6 @@
 import { actionCreatorFactory } from 'typescript-fsa';
 import axios from 'axios';
+import { Dispatch, AnyAction } from 'redux';
 
 const actionCreator = actionCreatorFactory();
 
@@ -15,7 +16,7 @@ export const HomeActions = {
 }
   
 export const DailyActions = {
-  updateMonth: actionCreator<number>('ACTIONS_UPDATE_DAILY_MONTH'),
+  addMonth: actionCreator('ACTIONS_UPDATE_DAILY_MONTH'),
   updateWorks: actionCreator<Array<any>>('ACTIONS_UPDATE_DAILY_WORKS')
 }
 
@@ -25,21 +26,21 @@ export const MonthlyActions = {
 }
 
 const client = axios.create({
-  baseURL: 'http://localhost:3001'
+  baseURL: process.env.NODE_ENV === 'production' ? "https://house-work-memo-back.herokuapp.com" : "http://localhost:5000"
 });
 
 
-/*
-export const fetchUsers = () => {
-  return async (dispatch: Dispatch<Action>) => {
-    try {
-      const response = await client.get('api/v1/list');
-      const result: Array<any> = response.data;
-      dispatch(TextInputActions.updateUsers(result));
-    } catch {
-      //勇者よ，忘れず例外処理をやるのです
-      //例外通知用の同期Actionを作るのもオススメです
-    }
-  };
-};
-*/
+// 非同期アクション
+// works取得(home用、createdAt降順)
+export const fetchHomeWorks = () => {
+  return (dispatch: Dispatch<AnyAction>) => {
+    client.get('/home')
+      .then((response) => {
+        const result: Array<any> = response.data;
+        dispatch(HomeActions.updateWorks(result));
+      })
+      .catch((err) => {
+        console.error('非同期通信エラー1')
+      })
+  }
+}

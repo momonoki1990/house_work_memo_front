@@ -66,8 +66,8 @@ export const homeReducer = reducerWithInitialState(initialHomeState)
   })
 
 export const dailyReducer = reducerWithInitialState(initialDailyState)
-  .case(DailyActions.updateMonth, (state, month) => {
-    return { ...state, month }
+  .case(DailyActions.addMonth, (state) => {
+    return { ...state, month: state.month += 1 }
   })
   .case(DailyActions.updateWorks, (state, works) => {
     return { ...state, works }
