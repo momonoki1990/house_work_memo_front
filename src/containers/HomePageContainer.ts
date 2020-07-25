@@ -1,20 +1,15 @@
 import { connect } from 'react-redux';
 import HomePage from '../components/HomePage';
-import { Form } from '../reducer';
+import { AppState } from '../Store';
 
-const mapStateToProps = (AppState: Form) => {
+const mapStateToProps = (AppState: AppState) => {
   return {
-    form: {
-      /*date: AppState.form.date,
-      category: AppState.form.category,
-      hours: AppState.form.hours,
-      note: AppState.form.note*/
-      date: AppState.date,
-      category: AppState.category,
-      hours: AppState.hours,
-      note: AppState.note
-    }
-  }
-};
+    date: AppState.form.date,
+    category: AppState.form.category,
+    hours: AppState.form.hours,
+    note: AppState.form.note,
+    aaa: AppState.daily.month
+  };
+}
 
 export default connect(mapStateToProps)(HomePage);

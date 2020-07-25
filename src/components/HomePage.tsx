@@ -67,11 +67,13 @@ const HomePage: React.FC = (props: any) => {
     </TableRow>
   );
   
-  const category = useSelector(categorySelector);
+  //const category = useSelector(categorySelector);
 
   useEffect(() => {
     console.log("毎回実行");
-    console.log(props.form)
+    console.log(props.date)
+    console.log(props.category)
+    console.log(props.aaa)
   });
 
   return (
