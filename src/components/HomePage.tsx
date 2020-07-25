@@ -53,6 +53,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const categorySelector = (state: any) => state.form.category;
+const monthSelector = (state: any) => state.daily.month;
 
 const HomePage: React.FC = (props: any) => {
   const classes = useStyles();
@@ -67,13 +68,13 @@ const HomePage: React.FC = (props: any) => {
     </TableRow>
   );
   
-  //const category = useSelector(categorySelector);
+  const category = useSelector(categorySelector);
+  const daily_month = useSelector(monthSelector);
 
   useEffect(() => {
     console.log("毎回実行");
-    console.log(props.date)
-    console.log(props.category)
-    console.log(props.aaa)
+    console.log(category);
+    console.log(daily_month);
   });
 
   return (
