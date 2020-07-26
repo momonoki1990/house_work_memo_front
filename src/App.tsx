@@ -15,11 +15,7 @@ class App extends Component {
       text: null
     }
   }
-  componentDidMount() {
-    client.get('/')
-      .then(response => console.log(response.data));
-      //.catch (err => console.log('非同期通信がエラー'));
-  }
+  
   render() {
     return (
       <div className="App">
