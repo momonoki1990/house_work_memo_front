@@ -84,7 +84,9 @@ const HomePage: React.FC = (props: any) => {
       <div className={classes.simpleForm}>
         <Typography variant='h5'><Box fontWeight='fontWeightBold' style={{ borderBottom: '2px solid #f37053' }}>カンタン入力</Box></Typography>
         <Box mt={2} p={3} style={{ backgroundColor: '#f6f6f6' }}>
+
           <TextField label='日付' type='date' defaultValue={today_str} InputLabelProps={{ shrink: true }} className={classes.calender} />
+
           <FormControl variant='outlined' className={classes.select}>
             <InputLabel id="demo-simple-select-label">分類</InputLabel>
             <Select
@@ -96,14 +98,35 @@ const HomePage: React.FC = (props: any) => {
               <MenuItem value={30}>Thirty</MenuItem>
             </Select>
           </FormControl>
+
+          <TextField
+            id="category-select"
+            select
+            label="分類"
+            //value={currency}
+            //onChange={handleChange}
+            helperText="Please select your currency"
+            variant="outlined"
+          >
+            {//currencies.map((option) => (
+              //<MenuItem key={option.value} value={option.value}>
+                //{option.label}
+              //</MenuItem>
+            //))
+            }
+          </TextField>
+
           <TextField label='時間を入力してください' variant='outlined' className={classes.input} />
           <Box display='inline-block' mr={3} style={{ padding: '1rem 0', fontSize: '1rem' }}>時間</Box>
-          <TextField label='内容を入力してください(任意)' variant='outlined' className={classes.input2} style={{ marginRight: '2rem' }}/>
+
+          <TextField label='内容を入力してください(任意)' variant='outlined' className={classes.input2} style={{ marginRight: '2rem' }} />
+          
           <Button variant="contained" color='secondary' size="large">
             <Box fontWeight="fontWeightBold" onClick={() => { dispatch(DailyActions.addMonth()) }}>保存</Box>
           </Button>
         </Box>
       </div>
+
       <div className={classes.recent}>
         <Typography variant='h5'><Box fontWeight='fontWeightBold' style={{ borderBottom: '2px solid #f37053' }}>最新の入力</Box></Typography>
         <Box mt={2} p={3} style={{ backgroundColor: '#f6f6f6' }}>
