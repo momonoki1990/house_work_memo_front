@@ -53,26 +53,14 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-const categorySelector = (state: any) => state.form.category;
-const monthSelector = (state: any) => state.daily.month;
-const homeWorksSelector = (state: any) => state.home.works;
+const worksSelectorOfHome = (state: any) => state.home.works;
 
 const HomePage: React.FC = (props: any) => {
   const classes = useStyles();
   const today = new Date();
   const today_str = `${today.getFullYear()}-${('0' + (today.getMonth() + 1)).slice(-2)}-${('0' + today.getDate()).slice(-2)}`
-  let listItem = (
-    <TableRow>
-      <TableCell component='th' scope='row'>2020年7月22日</TableCell>
-      <TableCell align='center'>料理</TableCell>
-      <TableCell align='center'>スパイスカレー</TableCell>
-      <TableCell align='center'>5時間</TableCell>
-    </TableRow>
-  );
   
-  const category = useSelector(categorySelector);
-  const daily_month = useSelector(monthSelector);
-  const home_works = useSelector(homeWorksSelector);
+  const works_of_home = useSelector(worksSelectorOfHome);
 
   const dispatch = useDispatch();
 
@@ -81,14 +69,19 @@ const HomePage: React.FC = (props: any) => {
     dispatch(fetchHomeWorks());
   }, []);
 
-  let works = home_works.map((work: any) => (
-    <div>{work.note}</div>
+  let works = works_of_home.map((work: any) => (
+    <TableRow>
+      <TableCell component='th' scope='row'>{work.done_date}</TableCell>
+      <TableCell align='center'>{work.Category.name}</TableCell>
+      <TableCell align='center'>{work.note}</TableCell>
+      <TableCell align='center'>{work.done_hours}</TableCell>
+    </TableRow>
   ))
 
   return (
     <div className={classes.root}>
       <div className={classes.simpleForm}>
-        <Typography variant='h5'><Box fontWeight='fontWeightBold' style={{ borderBottom: '2px solid #f37053' }}>カンタン入力{daily_month}</Box></Typography>
+        <Typography variant='h5'><Box fontWeight='fontWeightBold' style={{ borderBottom: '2px solid #f37053' }}>カンタン入力</Box></Typography>
         <Box mt={2} p={3} style={{ backgroundColor: '#f6f6f6' }}>
           <TextField label='日付' type='date' defaultValue={today_str} InputLabelProps={{ shrink: true }} className={classes.calender} />
           <FormControl variant='outlined' className={classes.select}>
@@ -110,14 +103,13 @@ const HomePage: React.FC = (props: any) => {
           </Button>
         </Box>
       </div>
-      <div>{works}</div>
       <div className={classes.recent}>
         <Typography variant='h5'><Box fontWeight='fontWeightBold' style={{ borderBottom: '2px solid #f37053' }}>最新の入力</Box></Typography>
         <Box mt={2} p={3} style={{ backgroundColor: '#f6f6f6' }}>
           <TableContainer component={Paper}>
             <Table className={classes.table}>
               <TableBody>
-                {[listItem, listItem, listItem, listItem, listItem, listItem, listItem, listItem, listItem, listItem]}
+                {works}
               </TableBody>
             </Table>
           </TableContainer>
