@@ -1,4 +1,5 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
+import { format, addDays, startOfMonth } from 'date-fns';
 import { FormInputActions, HomeActions, DailyActions, MonthlyActions } from './actions';
 
 export interface Form {
@@ -12,18 +13,20 @@ export interface Home {
   works: Array<any>  // 作成日(createdAt)降順
 }
 export interface Daily {
-  month: number,
+  month: Date,
   works: Array<any>  // 作業日(done_date)降順
 }
 export interface Monthly {
-  month: number,
+  month: Date,
   hours_per_category: Array<any>
   
 }
 
-const today = new Date();
+let today = new Date();
 // 2020/07/24の形式に直す
-const today_str = `${today.getFullYear()}-${('0' + (today.getMonth() + 1)).slice(-2)}-${('0' + today.getDate()).slice(-2)}`
+const today_str =  format(today, 'yyyy/MM/dd')
+// 月初に直す→2020-07-01T06:36:45.878Z
+today = addDays(startOfMonth(today), +1)
 
 const initialFormState: Form = {
   date: today_str,
@@ -37,12 +40,12 @@ const initialHomeState: Home = {
 };
 
 const initialDailyState: Daily = {
-  month: today.getMonth() + 1,
+  month: today, // 月初
   works: []
 };
 
 const initialMonthlyState: Monthly = {
-  month: today.getMonth() + 1,
+  month: today,　// 月初
   hours_per_category: [] // 分類別月間合計時間
 }
 
@@ -67,15 +70,19 @@ export const homeReducer = reducerWithInitialState(initialHomeState)
 
 export const dailyReducer = reducerWithInitialState(initialDailyState)
   .case(DailyActions.addMonth, (state) => {
-    return { ...state, month: state.month += 1 }
+    let month = state.month;
+    month.setMonth(month.getMonth() + 1);
+    return { ...state, month: month }
   })
   .case(DailyActions.updateWorks, (state, works) => {
     return { ...state, works }
   })
 
 export const monthlyReducer = reducerWithInitialState(initialMonthlyState)
-  .case(MonthlyActions.updateMonth, (state, month) => {
-    return { ...state, month }
+  .case(MonthlyActions.addMonth, (state) => {
+    let month = state.month;
+    month.setMonth(month.getMonth() + 1);
+    return { ...state, month: month }
   })
   .case(MonthlyActions.updateHoursPerCategory, (state, hours_per_category) => {
     return { ...state, hours_per_category }

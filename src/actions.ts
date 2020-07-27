@@ -21,7 +21,7 @@ export const DailyActions = {
 }
 
 export const MonthlyActions = {
-  updateMonth: actionCreator<number>('ACTIONS_UPDATE_MONTHLY_MONTH'),
+  addMonth: actionCreator('ACTIONS_UPDATE_MONTHLY_MONTH'),
   updateHoursPerCategory: actionCreator<Array<any>>('ACTIONS_UPDATE_HOURS_PER_CATEGORY')
 }
 
@@ -31,7 +31,7 @@ const client = axios.create({
 
 
 // 非同期アクション
-// works取得(home用、createdAt降順)
+// works取得(Home用、createdAt降順)
 export const fetchHomeWorks = () => {
   return (dispatch: Dispatch<AnyAction>) => {
     client.get('/home')
@@ -41,6 +41,21 @@ export const fetchHomeWorks = () => {
       })
       .catch((err) => {
         console.error('非同期通信エラー1')
+      })
+  }
+}
+
+// hours_per_category取得(Monthly用、Category.id降順)
+export const fetchMonthlyHoursPerCategory = (month: Date) => {
+  return (dispatch: Dispatch<AnyAction>) => {
+    client.get('/monthly', { params: { month: month } })
+      .then((response) => {
+        const result: Array<any> = response.data;
+        dispatch(MonthlyActions.updateHoursPerCategory(result));
+      })
+      .catch((err) => {
+        console.error('非同期通信エラー2');
+        console.error(err);
       })
   }
 }
