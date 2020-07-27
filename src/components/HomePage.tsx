@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from 'react';
+import { format } from 'date-fns';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -71,10 +72,10 @@ const HomePage: React.FC = (props: any) => {
 
   let works = works_of_home.map((work: any) => (
     <TableRow>
-      <TableCell component='th' scope='row'>{work.done_date}</TableCell>
+      <TableCell component='th' scope='row'>{format(new Date(work.done_date), 'yyyy年MM月dd日')}</TableCell>
       <TableCell align='center'>{work.Category.name}</TableCell>
       <TableCell align='center'>{work.note}</TableCell>
-      <TableCell align='center'>{work.done_hours}</TableCell>
+      <TableCell align='center'>{work.done_hours}時間</TableCell>
     </TableRow>
   ))
 

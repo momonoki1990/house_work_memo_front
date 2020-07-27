@@ -36,7 +36,7 @@ export const fetchHomeWorks = () => {
   return (dispatch: Dispatch<AnyAction>) => {
     client.get('/home')
       .then((response) => {
-        const result: Array<any> = response.data;
+        const result: Array<object> = response.data;
         dispatch(HomeActions.updateWorks(result));
       })
       .catch((err) => {
@@ -50,11 +50,26 @@ export const fetchMonthlyHoursPerCategory = (month: Date) => {
   return (dispatch: Dispatch<AnyAction>) => {
     client.get('/monthly', { params: { month: month } })
       .then((response) => {
-        const result: Array<any> = response.data;
+        const result: Array<object> = response.data;
         dispatch(MonthlyActions.updateHoursPerCategory(result));
       })
       .catch((err) => {
         console.error('非同期通信エラー2');
+        console.error(err);
+      })
+  }
+}
+
+// works取得(daily用、done_date降順)
+export const fetchDailyWorks = (month: Date) => {
+  return (dispatch: Dispatch<AnyAction>) => {
+    client.get('/daily', { params: { month: month } })
+      .then((response) => {
+        const result: Array<object> = response.data;
+        dispatch(DailyActions.updateWorks(result));
+      })
+      .catch((err) => {
+        console.error('非同期通信エラー3');
         console.error(err);
       })
   }
