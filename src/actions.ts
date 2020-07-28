@@ -31,7 +31,8 @@ const client = axios.create({
 });
 
 
-// 非同期アクション
+// 非同期通信アクション
+
 // Home用デフォルトアクション、works(createdAt降順)・categories取得
 export const defaultHomeAction = () => {
   return (dispatch: Dispatch<AnyAction>) => {
@@ -60,7 +61,7 @@ export const fetchMonthlyHoursPerCategory = (month: Date) => {
         console.error(err);
       })
   }
-}
+};
 
 // works取得(daily用、done_date降順)
 export const fetchDailyWorks = (month: Date) => {
@@ -75,4 +76,21 @@ export const fetchDailyWorks = (month: Date) => {
         console.error(err);
       })
   }
-}
+};
+
+// work作成
+export const createWork = (data: any) => {
+  return (dispatch: Dispatch<AnyAction>) => {
+    //client.get('/home', data) //post
+    client.post('/home', data)
+      .then((response) => {
+        const result: Array<any> = response.data;
+        //dispatch(HomeActions.updateWorks(result[0])); // result
+        dispatch(HomeActions.updateWorks(result));
+      })
+      .catch((err) => {
+        console.error('非同期通信エラー4');
+        console.error(err);
+      })
+  }
+};

@@ -57,7 +57,7 @@ const DailyPage = () => {
   }, []);
 
   let listItem = works_of_daily.map((work: any) => (
-    <TableRow>
+    <TableRow key={work.id}>
       <TableCell component='th' scope='row'>{format(new Date(work.done_date), 'yyyy年MM月dd日')}</TableCell>
       <TableCell align='center'>{work.Category.name}</TableCell>
       <TableCell align='center'>{work.note}</TableCell>

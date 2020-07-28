@@ -45,7 +45,7 @@ const MonthlyPage = (props: any) => {
   }, []);
 
   let listItem = hours_per_category_of_monthly.map((category: any) => (
-    <TableRow>
+    <TableRow key={category.id}>
       <TableCell align='center'>{category.name}</TableCell>
       <TableCell align='center'>{category.hours}時間</TableCell>
       <TableCell align='center'>{category.rate}％</TableCell>
