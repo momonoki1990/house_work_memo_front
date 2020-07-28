@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { format } from 'date-fns';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -11,6 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { fetchDailyWorks } from '../actions';
 
 
 const useStyles = makeStyles(theme => ({
@@ -27,6 +30,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const worksOfDailySelector = (state: any) => state.daily.works;
+
+const monthOfDailySelector = (state: any) => state.daily.month;
+
 const DailyPage = () => {
   const classes = useStyles();
 
@@ -38,12 +45,23 @@ const DailyPage = () => {
     setAnchorEl(null);
   };
 
-  let listItem = (
-    <TableRow>
-      <TableCell component='th' scope='row'>2020年7月22日</TableCell>
-      <TableCell align='center'>料理</TableCell>
-      <TableCell align='center'>スパイスカレー</TableCell>
-      <TableCell align='center'>5時間</TableCell>
+  const works_of_daily = useSelector(worksOfDailySelector);
+
+  const month_of_daily = useSelector(monthOfDailySelector);
+  
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("毎回実行");
+    dispatch(fetchDailyWorks(month_of_daily));
+  }, []);
+
+  let listItem = works_of_daily.map((work: any) => (
+    <TableRow key={work.id}>
+      <TableCell component='th' scope='row'>{format(new Date(work.done_date), 'yyyy年MM月dd日')}</TableCell>
+      <TableCell align='center'>{work.Category.name}</TableCell>
+      <TableCell align='center'>{work.note}</TableCell>
+      <TableCell align='center'>{work.done_hours}時間</TableCell>
       <TableCell align='right'>
         <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
           Open Menu
@@ -60,7 +78,7 @@ const DailyPage = () => {
         </Menu>
       </TableCell>
     </TableRow>
-  );
+  ));
 
   return (
     <div className={classes.root}>
@@ -70,7 +88,7 @@ const DailyPage = () => {
           <TableContainer component={Paper}>
             <Table className={classes.table}>
               <TableBody>
-                {[listItem, listItem, listItem, listItem, listItem, listItem, listItem, listItem, listItem, listItem]}
+                {listItem}
               </TableBody>
             </Table>
           </TableContainer>

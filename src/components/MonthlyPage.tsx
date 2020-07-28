@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,7 +34,7 @@ const MonthlyPage = (props: any) => {
 
   const hours_per_category_of_monthly = useSelector(hoursPerCategoryOfMonthlySelector);
 
-  const month_of_monthly = useSelector(monthOfMonthlySelector)
+  const month_of_monthly = useSelector(monthOfMonthlySelector);
 
   const dispatch = useDispatch();
 
@@ -42,19 +42,11 @@ const MonthlyPage = (props: any) => {
     console.log("毎回実行");
     // 非同期通信してmonth_of_monthly月のhours_per_categoryを取得、stateを更新
     dispatch(fetchMonthlyHoursPerCategory(month_of_monthly));
-    console.log(hours_per_category_of_monthly);
   }, []);
 
-  let listItem = (
-    <TableRow>
-      <TableCell align='center'>料理</TableCell>
-      <TableCell align='center'>5時間</TableCell>
-      <TableCell align='center'>割合</TableCell>
-    </TableRow>
-  );
-  let listItem2 = hours_per_category_of_monthly.map((category: any) => (
-    <TableRow>
-      <TableCell align='center'>{category.category_name}</TableCell>
+  let listItem = hours_per_category_of_monthly.map((category: any) => (
+    <TableRow key={category.id}>
+      <TableCell align='center'>{category.name}</TableCell>
       <TableCell align='center'>{category.hours}時間</TableCell>
       <TableCell align='center'>{category.rate}％</TableCell>
     </TableRow>
@@ -68,7 +60,7 @@ const MonthlyPage = (props: any) => {
           <TableContainer component={Paper}>
             <Table className={classes.table}>
               <TableBody>
-                {listItem2}
+                {listItem}
               </TableBody>
             </Table>
           </TableContainer>
