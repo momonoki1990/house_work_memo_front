@@ -2,12 +2,10 @@ import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from 'react';
 import { format } from 'date-fns';
+import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -17,7 +15,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import Paper from '@material-ui/core/Paper';
-import { DailyActions, fetchHomeWorks } from '../actions';
+import { defaultHomeAction } from '../actions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -55,6 +53,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const worksSelectorOfHome = (state: any) => state.home.works;
+const categorySelectorOfForm = (state: any) => state.form.category;
+const categoriesSelectorOfHome = (state: any) => state.home.categories; 
 
 const HomePage: React.FC = (props: any) => {
   const classes = useStyles();
@@ -62,13 +62,19 @@ const HomePage: React.FC = (props: any) => {
   const today_str = `${today.getFullYear()}-${('0' + (today.getMonth() + 1)).slice(-2)}-${('0' + today.getDate()).slice(-2)}`
   
   const works_of_home = useSelector(worksSelectorOfHome);
+  const category_of_form = useSelector(categorySelectorOfForm);
+  const categories_of_home = useSelector(categoriesSelectorOfHome);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     console.log("毎回実行");
-    dispatch(fetchHomeWorks());
+    dispatch(defaultHomeAction());
   }, []);
+
+  // React Hook Form関連
+  const { register, handleSubmit, errors } = useForm();
+  //const onSubmit = data => console.log(data);
 
   let works = works_of_home.map((work: any) => (
     <TableRow>
@@ -79,51 +85,57 @@ const HomePage: React.FC = (props: any) => {
     </TableRow>
   ))
 
+  let categories = categories_of_home.map((category: any) => (
+    <MenuItem key={category.name} value={category.name}>{category.name}</MenuItem>
+  ));
+
   return (
     <div className={classes.root}>
       <div className={classes.simpleForm}>
-        <Typography variant='h5'><Box fontWeight='fontWeightBold' style={{ borderBottom: '2px solid #f37053' }}>カンタン入力</Box></Typography>
+        <Typography variant='h5'><Box fontWeight='fontWeightBold' style={{ borderBottom: '2px solid #f37053' }}>カンタン入力{category_of_form}</Box></Typography>
         <Box mt={2} p={3} style={{ backgroundColor: '#f6f6f6' }}>
+          <form onSubmit={handleSubmit(data => console.log(data))}>
 
-          <TextField label='日付' type='date' defaultValue={today_str} InputLabelProps={{ shrink: true }} className={classes.calender} />
+            <TextField label='日付' type='date' defaultValue={today_str} InputLabelProps={{ shrink: true }} className={classes.calender}
+              name="date"
+              inputRef={register({ required: true })}
+              error={Boolean(errors.title)}
+              helperText={errors.title && "選択してください"}
+            />
 
-          <FormControl variant='outlined' className={classes.select}>
-            <InputLabel id="demo-simple-select-label">分類</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+            <TextField
+              id="category-select"
+              select
+              label="分類"
+              value='料理'
+              //onChange={handleChange}
+              variant="outlined"
+              inputRef={register({ required: true })}
+              error={Boolean(errors.title)}
+              helperText={errors.title && "選択してください"}
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
+              {categories}
+            </TextField>
 
-          <TextField
-            id="category-select"
-            select
-            label="分類"
-            //value={currency}
-            //onChange={handleChange}
-            helperText="Please select your currency"
-            variant="outlined"
-          >
-            {//currencies.map((option) => (
-              //<MenuItem key={option.value} value={option.value}>
-                //{option.label}
-              //</MenuItem>
-            //))
-            }
-          </TextField>
+            <TextField label='時間を入力してください' variant='outlined' className={classes.input}
+              name="hours"
+              inputRef={register({ required: true })}
+              error={Boolean(errors.title)}
+              helperText={errors.title && "入力してください"}
+            />
+            <Box display='inline-block' mr={3} style={{ padding: '1rem 0', fontSize: '1rem' }}>時間</Box>
 
-          <TextField label='時間を入力してください' variant='outlined' className={classes.input} />
-          <Box display='inline-block' mr={3} style={{ padding: '1rem 0', fontSize: '1rem' }}>時間</Box>
+            <TextField label='内容を入力してください(任意)' variant='outlined' className={classes.input2} style={{ marginRight: '2rem' }}
+              name="note"
+              inputRef={register({ required: true, maxLength: 3 })}
+              error={Boolean(errors.title)}
+              helperText={errors.title && "メモは20文字以内にしてください。"} />
 
-          <TextField label='内容を入力してください(任意)' variant='outlined' className={classes.input2} style={{ marginRight: '2rem' }} />
-          
-          <Button variant="contained" color='secondary' size="large">
-            <Box fontWeight="fontWeightBold" onClick={() => { dispatch(DailyActions.addMonth()) }}>保存</Box>
-          </Button>
+            <Button type='submit' variant="contained" color='secondary' size="large">
+              <Box fontWeight="fontWeightBold">保存</Box>
+            </Button>
+
+          </form>
         </Box>
       </div>
 

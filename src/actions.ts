@@ -12,7 +12,8 @@ export const FormInputActions = {
 }
 
 export const HomeActions = {
-    updateWorks: actionCreator<Array<any>>('ACTIONS_UPDATE_HOME_WORKS')
+  updateWorks: actionCreator<Array<any>>('ACTIONS_UPDATE_HOME_WORKS'),
+  updateCategories: actionCreator<Array<any>>('ACTIONS_UPDATE_HOME_CATEGORIES')
 }
   
 export const DailyActions = {
@@ -31,13 +32,14 @@ const client = axios.create({
 
 
 // 非同期アクション
-// works取得(Home用、createdAt降順)
-export const fetchHomeWorks = () => {
+// Home用デフォルトアクション、works(createdAt降順)・categories取得
+export const defaultHomeAction = () => {
   return (dispatch: Dispatch<AnyAction>) => {
     client.get('/home')
       .then((response) => {
-        const result: Array<object> = response.data;
-        dispatch(HomeActions.updateWorks(result));
+        const result: Array<any> = response.data;
+        dispatch(HomeActions.updateWorks(result[0]));
+        dispatch(HomeActions.updateCategories(result[1]));
       })
       .catch((err) => {
         console.error('非同期通信エラー1')
@@ -50,7 +52,7 @@ export const fetchMonthlyHoursPerCategory = (month: Date) => {
   return (dispatch: Dispatch<AnyAction>) => {
     client.get('/monthly', { params: { month: month } })
       .then((response) => {
-        const result: Array<object> = response.data;
+        const result: Array<any> = response.data;
         dispatch(MonthlyActions.updateHoursPerCategory(result));
       })
       .catch((err) => {

@@ -10,7 +10,8 @@ export interface Form {
 };
 
 export interface Home {
-  works: Array<any>  // 作成日(createdAt)降順
+  works: Array<any>,  // 作成日(createdAt)降順
+  categories: Array<any>
 }
 export interface Daily {
   month: Date,
@@ -36,7 +37,8 @@ const initialFormState: Form = {
 };
 
 const initialHomeState: Home = {
-  works: []
+  works: [],
+  categories: []
 };
 
 const initialDailyState: Daily = {
@@ -66,6 +68,9 @@ export const formReducer = reducerWithInitialState(initialFormState)
 export const homeReducer = reducerWithInitialState(initialHomeState)
   .case(HomeActions.updateWorks, (state, works) => {
     return { ...state, works }
+  })
+  .case(HomeActions.updateCategories, (state, categories) => {
+    return { ...state, categories }
   })
 
 export const dailyReducer = reducerWithInitialState(initialDailyState)
