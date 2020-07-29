@@ -75,8 +75,13 @@ export const homeReducer = reducerWithInitialState(initialHomeState)
 
 export const dailyReducer = reducerWithInitialState(initialDailyState)
   .case(DailyActions.addMonth, (state) => {
-    let month = state.month;
+    let month = new Date(state.month);
     month.setMonth(month.getMonth() + 1);
+    return { ...state, month: month }
+  })
+  .case(DailyActions.subMonth, (state) => {
+    let month = new Date(state.month);
+    month.setMonth(month.getMonth() - 1);
     return { ...state, month: month }
   })
   .case(DailyActions.updateWorks, (state, works) => {
@@ -85,8 +90,13 @@ export const dailyReducer = reducerWithInitialState(initialDailyState)
 
 export const monthlyReducer = reducerWithInitialState(initialMonthlyState)
   .case(MonthlyActions.addMonth, (state) => {
-    let month = state.month;
+    let month = new Date(state.month);
     month.setMonth(month.getMonth() + 1);
+    return { ...state, month: month }
+  })
+  .case(MonthlyActions.subMonth, (state) => {
+    let month = new Date(state.month);
+    month.setMonth(month.getMonth() - 1);
     return { ...state, month: month }
   })
   .case(MonthlyActions.updateHoursPerCategory, (state, hours_per_category) => {

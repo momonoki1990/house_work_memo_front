@@ -18,11 +18,13 @@ export const HomeActions = {
   
 export const DailyActions = {
   addMonth: actionCreator('ACTIONS_UPDATE_DAILY_MONTH'),
+  subMonth: actionCreator('ACTIONS_SUB_DAILY_MONTH'),
   updateWorks: actionCreator<Array<any>>('ACTIONS_UPDATE_DAILY_WORKS')
 }
 
 export const MonthlyActions = {
   addMonth: actionCreator('ACTIONS_UPDATE_MONTHLY_MONTH'),
+  subMonth: actionCreator('ACTIONS_SUB_MONTHLY_MONTH'),
   updateHoursPerCategory: actionCreator<Array<any>>('ACTIONS_UPDATE_HOURS_PER_CATEGORY')
 }
 
