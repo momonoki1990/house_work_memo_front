@@ -85,10 +85,9 @@ const HomePage: React.FC = (props: any) => {
   };
 
   // 削除ボタンの処理
-  const onClick = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleDelete = (event: MouseEvent<HTMLButtonElement>) => {
     dispatch(deleteWorkOfHome(event.currentTarget.getAttribute('data-key')));
   }
-
 
   let listItem = works_of_home.map((work: any) => (
     <TableRow key={work.id}>
@@ -97,7 +96,7 @@ const HomePage: React.FC = (props: any) => {
       <TableCell align='center'>{work.note}</TableCell>
       <TableCell align='center'>{work.done_hours}時間</TableCell>
       <TableCell align='right'>
-        <Button variant="contained" color="secondary" data-key={work.id} onClick={onClick} startIcon={<DeleteIcon />}>削除</Button>
+        <Button variant="contained" color="secondary" data-key={work.id} onClick={handleDelete} startIcon={<DeleteIcon />}>削除</Button>
       </TableCell>
     </TableRow>
   ))
