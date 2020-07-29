@@ -81,7 +81,6 @@ export const fetchDailyWorks = (month: Date) => {
 // work作成
 export const createWork = (data: any) => {
   return (dispatch: Dispatch<AnyAction>) => {
-    //client.get('/home', data) //post
     client.post('/home', data)
       .then((response) => {
         const result: Array<any> = response.data;
@@ -94,3 +93,18 @@ export const createWork = (data: any) => {
       })
   }
 };
+
+// work削除
+export const deleteDailyWork = (month: Date, id: any) => {
+  return (dispatch: Dispatch<AnyAction>) => {
+    client.delete('/daily', { params: { month: month, id: id}})
+      .then((response) => {
+        const result: Array<any> = response.data;
+        dispatch(DailyActions.updateWorks(result));
+      })
+      .catch((err) => {
+        console.error('非同期通信エラー5');
+        console.error(err);
+      })
+  }
+}
