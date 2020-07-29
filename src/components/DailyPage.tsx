@@ -79,7 +79,7 @@ const DailyPage = () => {
       <TableCell align='center'>{work.note}</TableCell>
       <TableCell align='center'>{work.done_hours}時間</TableCell>
       <TableCell align='right'>
-        <Button variant="contained" color="secondary" data-key={work.id} onClick={handleDelete} startIcon={<DeleteIcon />}>削除</Button>
+          <Button variant="contained" color="secondary" data-key={work.id} onClick={handleDelete} startIcon={<DeleteIcon />}>削除</Button>
       </TableCell>
     </TableRow>
   ));
