@@ -48,7 +48,7 @@ export const defaultHomeAction = () => {
   }
 }
 
-// hours_per_category取得(Monthly用、Category.id降順)
+// hours_per_category取得(Monthlyページ用、Category.id降順)
 export const fetchMonthlyHoursPerCategory = (month: Date) => {
   return (dispatch: Dispatch<AnyAction>) => {
     client.get('/monthly', { params: { month: month } })
@@ -63,7 +63,7 @@ export const fetchMonthlyHoursPerCategory = (month: Date) => {
   }
 };
 
-// works取得(daily用、done_date降順)
+// works取得(Dailyページ用、done_date降順)
 export const fetchDailyWorks = (month: Date) => {
   return (dispatch: Dispatch<AnyAction>) => {
     client.get('/daily', { params: { month: month } })
@@ -94,8 +94,23 @@ export const createWork = (data: any) => {
   }
 };
 
-// work削除
-export const deleteDailyWork = (month: Date, id: any) => {
+// work削除(Homeページ用)
+export const deleteWorkOfHome = (id: any) => {
+  return (dispatch: Dispatch<AnyAction>) => {
+    client.delete('/home', { params: { id: id } })
+      .then((response) => {
+        const result: Array<any> = response.data;
+        dispatch(HomeActions.updateWorks(result));
+      })
+      .catch((err) => {
+        console.error('非同期通信エラー5');
+        console.error(err);
+      })
+  }
+}
+
+// work削除(Dailyページ用)
+export const deleteWorkOfDaily = (month: Date, id: any) => {
   return (dispatch: Dispatch<AnyAction>) => {
     client.delete('/daily', { params: { month: month, id: id}})
       .then((response) => {
@@ -103,7 +118,7 @@ export const deleteDailyWork = (month: Date, id: any) => {
         dispatch(DailyActions.updateWorks(result));
       })
       .catch((err) => {
-        console.error('非同期通信エラー5');
+        console.error('非同期通信エラー6');
         console.error(err);
       })
   }

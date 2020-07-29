@@ -1,4 +1,4 @@
-import React, { useEffect, useState, MouseEvent } from 'react';
+import React, { useEffect, MouseEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { format } from 'date-fns';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,11 +12,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuIcon from '@material-ui/icons/Menu';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { fetchDailyWorks, deleteDailyWork } from '../actions';
+import { fetchDailyWorks, deleteWorkOfDaily } from '../actions';
 
 
 const useStyles = makeStyles(theme => ({
@@ -41,16 +37,9 @@ const monthOfDailySelector = (state: any) => state.daily.month;
 const DailyPage = () => {
   const classes = useStyles();
 
-  // Menu関連
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
+  // 削除ボタンの処理
   const onClick = (event: MouseEvent<HTMLButtonElement>) => {
-    console.log(event.currentTarget.getAttribute('data-key'));
-    dispatch(deleteDailyWork(month_of_daily, event.currentTarget.getAttribute('data-key')));
+    dispatch(deleteWorkOfDaily(month_of_daily, event.currentTarget.getAttribute('data-key')));
   }
 
   // グローバルstate
