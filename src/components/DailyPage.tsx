@@ -14,20 +14,17 @@ import Button from '@material-ui/core/Button';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Container from '@material-ui/core/Container';
 import { fetchDailyWorks, deleteWorkOfDaily, DailyActions } from '../actions';
 
 
 const useStyles = makeStyles(theme => ({
   root: {
-    //textAlign: 'center'
   },
   detail: {
     padding: '4rem 2rem 2rem 2rem',
-    margin: '0 auto',
-    maxWidth: '1200px'
   },
   table: {
-    minWidth: 650,
   }
 }));
 
@@ -86,7 +83,7 @@ const DailyPage = () => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.detail}>
+      <Container className={classes.detail} maxWidth='lg'>
         <Typography variant='h5'><Box fontWeight='fontWeightBold' style={{ borderBottom: '2px solid #f37053' }}>日別詳細</Box></Typography>
         <Box display='flex' justifyContent='space-between' mt={2}>
           <Button variant='contained' onClick={handleSubMonth}><ArrowBackIosIcon /></Button>
@@ -102,7 +99,7 @@ const DailyPage = () => {
             </Table>
           </TableContainer>
         </Box>
-      </div>
+      </Container>
     </div>
   )
 }
