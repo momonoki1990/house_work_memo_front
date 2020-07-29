@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+// stateセレクター
 const monthOfMonthlySelector = (state: any) => state.monthly.month;
 
 const hoursPerCategoryOfMonthlySelector = (state: any) => state.monthly.hours_per_category;

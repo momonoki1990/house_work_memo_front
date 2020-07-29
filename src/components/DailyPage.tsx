@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-// Selector
+// stateセレクター
 const worksOfDailySelector = (state: any) => state.daily.works;
 
 const monthOfDailySelector = (state: any) => state.daily.month;

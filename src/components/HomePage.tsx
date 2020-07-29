@@ -56,8 +56,10 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
+
+// stateセレクター
 const worksSelectorOfHome = (state: any) => state.home.works;
-const categorySelectorOfForm = (state: any) => state.form.category;
+
 const categoriesSelectorOfHome = (state: any) => state.home.categories; 
 
 const HomePage: React.FC = (props: any) => {
@@ -66,7 +68,7 @@ const HomePage: React.FC = (props: any) => {
   const today_str = `${today.getFullYear()}-${('0' + (today.getMonth() + 1)).slice(-2)}-${('0' + today.getDate()).slice(-2)}`
   
   const works_of_home = useSelector(worksSelectorOfHome);
-  const category_of_form = useSelector(categorySelectorOfForm);
+  
   const categories_of_home = useSelector(categoriesSelectorOfHome);
 
   const dispatch = useDispatch();
@@ -108,7 +110,7 @@ const HomePage: React.FC = (props: any) => {
   return (
     <div className={classes.root}>
       <div className={classes.simpleForm}>
-        <Typography variant='h5'><Box fontWeight='fontWeightBold' style={{ borderBottom: '2px solid #f37053' }}>カンタン入力{category_of_form}</Box></Typography>
+        <Typography variant='h5'><Box fontWeight='fontWeightBold' style={{ borderBottom: '2px solid #f37053' }}>カンタン入力</Box></Typography>
         <Box mt={2} p={3} style={{ backgroundColor: '#f6f6f6' }}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <TextField label='日付' type='date' defaultValue={today_str} InputLabelProps={{ shrink: true }} className={classes.calender}

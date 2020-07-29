@@ -4,13 +4,6 @@ import { Dispatch, AnyAction } from 'redux';
 
 const actionCreator = actionCreatorFactory();
 
-export const FormInputActions = {
-  updateDate: actionCreator<string>('ACTIONS_UPDATE_DATE'),
-  updateCategory: actionCreator<string>('ACTIONS_UPDATE_CATEGORY'),
-  updateHours: actionCreator<number>('ACTIONS_UPDATE_HOURS'),
-  updateNote: actionCreator<string>('ACTIONS_UPDATE_NOTE'),
-}
-
 export const HomeActions = {
   updateWorks: actionCreator<Array<any>>('ACTIONS_UPDATE_HOME_WORKS'),
   updateCategories: actionCreator<Array<any>>('ACTIONS_UPDATE_HOME_CATEGORIES')
