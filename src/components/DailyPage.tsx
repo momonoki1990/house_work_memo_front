@@ -14,6 +14,8 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { fetchDailyWorks, deleteWorkOfDaily, DailyActions } from '../actions';
 
+
+// スタイル
 const useStyles = makeStyles(theme => ({
   root: {
   },
@@ -21,7 +23,6 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('xs')]: {
       paddingLeft: theme.spacing(1),
       paddingRight: theme.spacing(1)
-    
     }
   },
   grid_row: {
@@ -37,10 +38,12 @@ const worksOfDailySelector = (state: any) => state.daily.works;
 
 const monthOfDailySelector = (state: any) => state.daily.month;
 
-const DailyPage = () => {
+// コンポーネント関数
+const DailyPage: React.FC = () => {
 
   // メディアクエリ
   const theme = useTheme();
+
   const window_over_sm = useMediaQuery(theme.breakpoints.up('sm'));
 
   const classes = useStyles();
@@ -52,10 +55,12 @@ const DailyPage = () => {
 
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     console.log("毎回実行");
     dispatch(fetchDailyWorks(month_of_daily));
   }, []);
+
 
   // 月遷移ボタンの処理
   const handleAddMonth = () => {
@@ -72,10 +77,12 @@ const DailyPage = () => {
     dispatch(fetchDailyWorks(month));
   }
 
+
   // 削除ボタンの処理
   const handleDelete = (event: MouseEvent<HTMLButtonElement>) => {
     dispatch(deleteWorkOfDaily(month_of_daily, event.currentTarget.getAttribute('data-key')));
   }
+
 
   // worksリストの中身
   let listItem = works_of_daily.map((work: any) => (
@@ -92,6 +99,7 @@ const DailyPage = () => {
       </Grid>
     </Grid>
   ));
+
 
   return (
     <div className={classes.root}>

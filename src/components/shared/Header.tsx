@@ -55,6 +55,7 @@ const Header: React.FC = () => {
   
   const window_over_sm = useMediaQuery(theme.breakpoints.up('sm'));
 
+
   // メニュー関連
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -66,6 +67,7 @@ const Header: React.FC = () => {
     setAnchorEl(null);
   };
 
+  
   return (
     <div>
       <div className={classes.root}>
