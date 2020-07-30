@@ -48,15 +48,26 @@ const useStyles = makeStyles(theme => ({
       marginRight: theme.spacing(2)
     },
     [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(1)
+      marginTop: theme.spacing(1),
+      width: '100%'
     }
   },
   hour: {
     marginRight: theme.spacing(1),
+    width: '8rem',
     [theme.breakpoints.down('xs')]: {
-      marginTop: theme.spacing(1)
+      marginTop: theme.spacing(1),
+      width: '80%'
     }
-    
+  },
+  hour_unit: {
+    [theme.breakpoints.up('sm')]: {
+      padding: '1rem 0',
+      fontSize: '1rem'
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: '1.5rem 0',
+    }
   },
   note: {
     width: '100%',
@@ -174,7 +185,7 @@ const HomePage: React.FC = (props: any) => {
         <div>
           <TextField label='時間を入力' variant='outlined' type='number' className={classes.hour} name="hours" inputRef={register({ required: true })}
             error={Boolean(errors.hours)} helperText={errors.hours && '必須項目です。'} />
-          <Box display='inline-block' style={{ padding: '1rem 0', fontSize: '1rem' }}>時間</Box>
+          <Box display='inline-block' className={classes.hour_unit}>時間</Box>
         </div>
       </div>
       <TextField label='内容を入力(任意)' variant='outlined' className={classes.note}
