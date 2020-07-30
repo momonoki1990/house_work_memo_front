@@ -17,13 +17,14 @@ import { fetchDailyWorks, deleteWorkOfDaily, DailyActions } from '../actions';
 
 // スタイル
 const useStyles = makeStyles(theme => ({
-  root: {
-  },
-  detail: {
+  container: {
     [theme.breakpoints.down('xs')]: {
       paddingLeft: theme.spacing(1),
       paddingRight: theme.spacing(1)
     }
+  },
+  detail: {
+
   },
   grid_row: {
     textAlign: 'center',
@@ -102,8 +103,8 @@ const DailyPage: React.FC = () => {
 
 
   return (
-    <div className={classes.root}>
-      <Container className={classes.detail} maxWidth='lg'>
+    <Container className={classes.container} maxWidth='lg'>
+      <div className={classes.detail}>
         <Typography variant='h5'><Box fontWeight='fontWeightBold' mt={6} style={{ borderBottom: '2px solid #f37053' }}>日別詳細</Box></Typography>
         <Box display='flex' justifyContent='space-between' mt={2}>
           <Button variant='contained' onClick={handleSubMonth}><ArrowBackIosIcon /></Button>
@@ -118,8 +119,8 @@ const DailyPage: React.FC = () => {
           </Box>
         ) : listItem
         }
-      </Container>
-    </div>
+      </div>
+    </Container>
   )
 }
 
