@@ -24,6 +24,10 @@ export default function createStore(history: History) {
     monthly: monthlyReducer,
     router: connectRouter(history)
   });
-  const middlewares = applyMiddleware(thunk, logger, routerMiddleware(history));
-  return reduxCreateStore(reducers, middlewares);
+  const middlewares = [thunk, routerMiddleware(history)];
+  if (process.env.NODE_ENV !== 'production') {
+    middlewares.push(logger)
+  }
+  //const middlewares = applyMiddleware(thunk, logger, routerMiddleware(history));
+  return reduxCreateStore(reducers, applyMiddleware(...middlewares));
 }
