@@ -10,6 +10,7 @@
 https://house-work-memo-front.herokuapp.com/
 
 フロントエンド
+https://github.com/momonoki1990/house_work_memo_front/blob/master/README.md
 
 バックエンド
 https://github.com/momonoki1990/house_work_memo_back
