@@ -15,6 +15,8 @@ import HomePage from '../HomePage';
 import MonthlyPage from '../MonthlyPage';
 import DailyPage from '../DailyPage';
 
+
+// スタイル
 const useStyles = makeStyles(theme => ({
   root: {
     
@@ -43,12 +45,14 @@ const useStyles = makeStyles(theme => ({
   link_menu: {
     color: '#000',
     textDecoration: 'none',
-    //fontWeight: 'bold'
   }
 }));
 
+
+// コンポーネント関数
 const Header: React.FC = () => {
   const classes = useStyles();
+
 
   // メディアクエリ
   const theme = useTheme();
@@ -67,7 +71,7 @@ const Header: React.FC = () => {
     setAnchorEl(null);
   };
 
-  
+
   return (
     <div>
       <div className={classes.root}>
@@ -80,12 +84,12 @@ const Header: React.FC = () => {
               <Typography variant="subtitle1" className={classes.links}>
                 <Link to='/top' className={classes.link}>トップ</Link>
                 <Link to='/' className={classes.link}>ホーム</Link>
-                <Link to='/monthly' className={classes.link}>月別</Link>
-                <Link to='/daily' className={classes.link}>日別</Link>
+                <Link to='/monthly' className={classes.link}>分類別</Link>
+                <Link to='/daily' className={classes.link}>月別</Link>
               </Typography>) : (
                 <Box className={classes.links_menu}>
                   <div>
-                    <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}><MenuIcon style={{ color: '#fff'}}/></Button>
+                    <Button aria-controls="simple-menu" onClick={handleClick}><MenuIcon style={{ color: '#fff'}}/></Button>
                     <Menu id="header-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
                       <MenuItem onClick={handleClose}><Link to='/top' className={classes.link_menu}>トップ</Link></MenuItem>
                       <MenuItem onClick={handleClose}><Link to='/' className={classes.link_menu}>ホーム</Link></MenuItem>

@@ -58,7 +58,6 @@ const DailyPage: React.FC = () => {
 
 
   useEffect(() => {
-    console.log("毎回実行");
     dispatch(fetchDailyWorks(month_of_daily));
   }, []);
 
@@ -105,7 +104,7 @@ const DailyPage: React.FC = () => {
   return (
     <Container className={classes.container} maxWidth='lg'>
       <div className={classes.detail}>
-        <Typography variant='h5'><Box fontWeight='fontWeightBold' mt={6} style={{ borderBottom: '2px solid #f37053' }}>日別詳細</Box></Typography>
+        <Typography variant='h5'><Box fontWeight='fontWeightBold' mt={6} style={{ borderBottom: '2px solid #f37053' }}>月別詳細</Box></Typography>
         <Box display='flex' justifyContent='space-between' mt={2}>
           <Button variant='contained' onClick={handleSubMonth}><ArrowBackIosIcon /></Button>
           <Typography variant='h6'>{format(month_of_daily, 'yyyy年MM月')}</Typography>

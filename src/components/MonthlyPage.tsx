@@ -62,7 +62,6 @@ const MonthlyPage: React.FC = (props: any) => {
 
 
   useEffect(() => {
-    console.log("毎回実行");
     // 非同期通信してmonth_of_monthly月のhours_per_categoryを取得、stateを更新
     dispatch(fetchMonthlyHoursPerCategory(month_of_monthly));
   }, []);

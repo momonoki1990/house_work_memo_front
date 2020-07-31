@@ -34,86 +34,87 @@ export const defaultHomeAction = () => {
     client.get('/home')
       .then((response) => {
         const result: Array<any> = response.data;
-        dispatch(HomeActions.updateWorks(result[0]));
-        dispatch(HomeActions.updateCategories(result[1]));
+        const works = result[0];
+        const category_names = result[1];
+        dispatch(HomeActions.updateWorks(works));
+        dispatch(HomeActions.updateCategories(category_names));
       })
       .catch((err) => {
-        console.error('非同期通信エラー1')
+        console.error(err);
       })
   }
 }
+
 
 // hours_per_category取得(Monthlyページ用、Category.id降順)
 export const fetchMonthlyHoursPerCategory = (month: Date) => {
   return (dispatch: Dispatch<AnyAction>) => {
     client.get('/monthly', { params: { month: month } })
       .then((response) => {
-        const result: Array<any> = response.data;
-        dispatch(MonthlyActions.updateHoursPerCategory(result));
+        const hours_per_category: Array<any> = response.data;
+        dispatch(MonthlyActions.updateHoursPerCategory(hours_per_category));
       })
       .catch((err) => {
-        console.error('非同期通信エラー2');
         console.error(err);
       })
   }
 };
+
 
 // works取得(Dailyページ用、done_date降順)
 export const fetchDailyWorks = (month: Date) => {
   return (dispatch: Dispatch<AnyAction>) => {
     client.get('/daily', { params: { month: month } })
       .then((response) => {
-        const result: Array<object> = response.data;
-        dispatch(DailyActions.updateWorks(result));
+        const works: Array<object> = response.data;
+        dispatch(DailyActions.updateWorks(works));
       })
       .catch((err) => {
-        console.error('非同期通信エラー3');
         console.error(err);
       })
   }
 };
+
 
 // work作成
 export const createWork = (data: any) => {
   return (dispatch: Dispatch<AnyAction>) => {
     client.post('/home', data)
       .then((response) => {
-        const result: Array<any> = response.data;
-        //dispatch(HomeActions.updateWorks(result[0])); // result
-        dispatch(HomeActions.updateWorks(result));
+        const new_works: Array<any> = response.data;
+        dispatch(HomeActions.updateWorks(new_works));
       })
       .catch((err) => {
-        console.error('非同期通信エラー4');
         console.error(err);
       })
   }
 };
+
 
 // work削除(Homeページ用)
 export const deleteWorkOfHome = (id: any) => {
   return (dispatch: Dispatch<AnyAction>) => {
     client.delete('/home', { params: { id: id } })
       .then((response) => {
-        const result: Array<any> = response.data;
-        dispatch(HomeActions.updateWorks(result));
+        const new_works: Array<any> = response.data;
+        dispatch(HomeActions.updateWorks(new_works));
       })
       .catch((err) => {
-        console.error('非同期通信エラー5');
         console.error(err);
       })
   }
 }
+
 
 // work削除(Dailyページ用)
 export const deleteWorkOfDaily = (month: Date, id: any) => {
   return (dispatch: Dispatch<AnyAction>) => {
     client.delete('/daily', { params: { month: month, id: id}})
       .then((response) => {
-        const result: Array<any> = response.data;
-        dispatch(DailyActions.updateWorks(result));
+        const new_works: Array<any> = response.data;
+        dispatch(DailyActions.updateWorks(new_works));
       })
       .catch((err) => {
-        console.error('非同期通信エラー6');
         console.error(err);
       })
   }

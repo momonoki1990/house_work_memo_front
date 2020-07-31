@@ -1,5 +1,5 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { format, addDays, startOfMonth } from 'date-fns';
+import { addDays, startOfMonth } from 'date-fns';
 import { HomeActions, DailyActions, MonthlyActions } from './actions';
 
 export interface Home {
@@ -17,8 +17,6 @@ export interface Monthly {
 }
 
 let today = new Date();
-// 2020/07/24の形式に直す
-const today_str =  format(today, 'yyyy/MM/dd')
 // 月初に直す→2020-07-01T06:36:45.878Z
 today = addDays(startOfMonth(today), +1)
 
