@@ -1,44 +1,20 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# House Work Memo
+家計簿をイメージした、家事を記録できるアプリです。
 
-## Available Scripts
+![スクリーンショット 2020-08-01 0 40 39](https://user-images.githubusercontent.com/35623368/89051779-b5141e00-d38f-11ea-9ab3-946460a55eed.png)
 
-In the project directory, you can run:
+![スクリーンショット 2020-08-01 0 40 54](https://user-images.githubusercontent.com/35623368/89051793-bb09ff00-d38f-11ea-9083-8bb7be4b92dd.png)
 
-### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## URL
+https://house-work-memo-front.herokuapp.com/
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## 使用技術
+- 言語: TypeScript 3.9.6
+- フロントエンド: React 16.13.1, Redux, React Router, Material UI
+- バックエンド: Express 4.17.1, Sequelize
+- インフラ: Heroku
+- 他: axios
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 機能一覧
+- 家事保存・削除機能
