@@ -78,12 +78,12 @@ const Header: React.FC = () => {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6">
-              <Link to='/' className={classes.logo}>House Work Memo</Link>
+              <Link to='/home' className={classes.logo}>House Work Memo</Link>
             </Typography>
             {window_over_sm ? (
               <Typography variant="subtitle1" className={classes.links}>
-                <Link to='/top' className={classes.link}>トップ</Link>
-                <Link to='/' className={classes.link}>ホーム</Link>
+                <Link to='/' className={classes.link}>トップ</Link>
+                <Link to='/home' className={classes.link}>ホーム</Link>
                 <Link to='/monthly' className={classes.link}>分類別</Link>
                 <Link to='/daily' className={classes.link}>月別</Link>
               </Typography>) : (
@@ -91,8 +91,8 @@ const Header: React.FC = () => {
                   <div>
                     <Button aria-controls="simple-menu" onClick={handleClick}><MenuIcon style={{ color: '#fff'}}/></Button>
                     <Menu id="header-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-                      <MenuItem onClick={handleClose}><Link to='/top' className={classes.link_menu}>トップ</Link></MenuItem>
-                      <MenuItem onClick={handleClose}><Link to='/' className={classes.link_menu}>ホーム</Link></MenuItem>
+                      <MenuItem onClick={handleClose}><Link to='/' className={classes.link_menu}>トップ</Link></MenuItem>
+                      <MenuItem onClick={handleClose}><Link to='/home' className={classes.link_menu}>ホーム</Link></MenuItem>
                       <MenuItem onClick={handleClose}><Link to='/monthly' className={classes.link_menu}>月別</Link></MenuItem>
                       <MenuItem onClick={handleClose}><Link to='/daily' className={classes.link_menu}>日別</Link></MenuItem>
                     </Menu>
@@ -103,8 +103,8 @@ const Header: React.FC = () => {
         </AppBar>
       </div>
       <Switch>
-        <Route exact path='/' component={HomePage} />
-        <Route exact path='/top' component={TopPage} />
+        <Route exact path='/' component={TopPage} />
+        <Route exact path='/home' component={HomePage} />
         <Route exact path='/monthly' component={MonthlyPage} />
         <Route exact path='/daily' component={DailyPage} />
       </Switch>

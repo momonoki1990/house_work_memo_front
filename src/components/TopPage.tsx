@@ -156,7 +156,7 @@ const TopPage: React.FC = () => {
           <Box mb={2} fontWeight="fontWeightBold">さっそく試してみる</Box>
         </Typography>
         <Button variant="contained" color='secondary' size="large">
-          <Box fontWeight="fontWeightBold"><Link to='/' className={classes.link}>デモ版を使ってみる</Link></Box>
+          <Box fontWeight="fontWeightBold"><Link to='/home' className={classes.link}>デモ版を使ってみる</Link></Box>
         </Button>
       </div>
       <div className={classes.copyright}><Typography variant='body2'>Copyright <CopyrightIcon fontSize='small' style={{ verticalAlign:'middle'}}/> naoya kumasegawa 2020</Typography></div>
