@@ -9,6 +9,11 @@
 ## URL
 https://house-work-memo-front.herokuapp.com/
 
+フロントエンド
+
+バックエンド
+https://github.com/momonoki1990/house_work_memo_back
+
 ## 使用技術
 - 言語: TypeScript 3.9.6
 - フロントエンド: React 16.13.1, Redux, React Router, Material UI
