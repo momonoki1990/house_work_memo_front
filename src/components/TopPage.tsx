@@ -18,18 +18,30 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
   },
   top: {
+    /*paddingTop: theme.spacing(36),
+    paddingBottom: theme.spacing(36),
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(20),
+      paddingBottom: theme.spacing(20),
+    },*/
+    borderBottom: '1px solid #000',
+    backgroundImage: `url(${process.env.PUBLIC_URL}/Background.jpg)`,
+    backgroundPosition: 'center 40%',
+    //backgroundColor: 'rgba(255,255,255,0.5)',
+    //backgroundBlendMode: 'lighten',
+    backgroundSize: 'cover'
+  },
+  cover: {
+    height: '100%',
+    backgroundColor: 'rgba(255,255,255,0.5)',
+  },
+  cover2: {
     paddingTop: theme.spacing(36),
     paddingBottom: theme.spacing(36),
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(20),
       paddingBottom: theme.spacing(20),
     },
-    borderBottom: '1px solid #000',
-    backgroundImage: `url(${process.env.PUBLIC_URL}/Background.jpg)`,
-    backgroundPosition: 'center 40%',
-    backgroundColor: 'rgba(255,255,255,0.5)',
-    backgroundBlendMode: 'lighten',
-    backgroundSize: 'cover'
   },
   logo: {
     fontWeight: 'bold',
@@ -96,18 +108,22 @@ const TopPage: React.FC = () => {
 
   const classes = useStyles();
 
-  
+
   return (
     <div className={classes.root}>
       <div className={classes.top}>
-        <Container maxWidth='lg'>
-          <Typography variant='h1' className={classes.logo}>
-            House Work Memo
-          </Typography>
-          <Typography variant='h4' className={classes.subtitle}>
-            毎日の家事を記録しよう。
-          </Typography>
-        </Container>
+        <div className={classes.cover}>
+          <div className={classes.cover2}>
+            <Container maxWidth='lg'>
+              <Typography variant='h1' className={classes.logo}>
+                House Work Memo
+              </Typography>
+              <Typography variant='h4' className={classes.subtitle}>
+                毎日の家事を記録しよう。
+              </Typography>
+            </Container>
+          </div>
+        </div>
       </div>
       <div className={classes.use}>
         <Container maxWidth='lg'>
@@ -121,9 +137,9 @@ const TopPage: React.FC = () => {
                 <Typography variant="h5">
                   <Box mt={1} mb={2} fontWeight="fontWeightBold"><span style={{ borderBottom: '2px solid #f37053' }}>記録に残す</span></Box>
                 </Typography>
-                <Typography variant="body1">
-                  <Box pr={2} pl={2}>いつ・何の家事をどれだけやったか、記録に残すことができます。</Box>
-                </Typography>
+                <Box pr={2} pl={2}>
+                  <Typography variant="body1">いつ・何の家事をどれだけやったか、記録に残すことができます。</Typography>
+                </Box>
               </Paper>
             </Grid>
             <Grid item xs={12} sm={4} className={classes.grid_item}>
@@ -132,9 +148,9 @@ const TopPage: React.FC = () => {
                 <Typography variant="h5">
                   <Box mt={1} mb={2} fontWeight="fontWeightBold"><span style={{ borderBottom: '2px solid #f37053' }}>振り返る</span></Box>
                 </Typography>
-                <Typography variant="body1">
-                  <Box pr={2} pl={2}>月別・分類別に作業時間を振り返ることができます。</Box>
-                </Typography>
+                <Box pr={2} pl={2}>
+                  <Typography variant="body1">月別・分類別に作業時間を振り返ることができます。</Typography>
+                </Box>
               </Paper>
             </Grid>
             <Grid item xs={12} sm={4} className={classes.grid_item}>
@@ -143,9 +159,9 @@ const TopPage: React.FC = () => {
                 <Typography variant="h5">
                   <Box mt={1} mb={2} fontWeight="fontWeightBold"><span style={{ borderBottom: '2px solid #f37053' }}>思い出になる</span></Box>
                 </Typography>
-                <Typography variant="body1">
-                  <Box pr={2} pl={2}>ひとつひとつの何でもない家事が、見返してみると思い出になります。</Box>
-                </Typography>
+                <Box pr={2} pl={2}>
+                  <Typography variant="body1">ひとつひとつの何でもない家事が、見返してみると思い出になります。</Typography>
+                </Box>
               </Paper>
             </Grid>
           </Grid>
@@ -159,7 +175,7 @@ const TopPage: React.FC = () => {
           <Box fontWeight="fontWeightBold"><Link to='/home' className={classes.link}>デモ版を使ってみる</Link></Box>
         </Button>
       </div>
-      <div className={classes.copyright}><Typography variant='body2'>Copyright <CopyrightIcon fontSize='small' style={{ verticalAlign:'middle'}}/> naoya kumasegawa 2020</Typography></div>
+      <div className={classes.copyright}><Typography variant='body2'>Copyright <CopyrightIcon fontSize='small' style={{ verticalAlign: 'middle' }} /> naoya kumasegawa 2020</Typography></div>
     </div>
   )
 
