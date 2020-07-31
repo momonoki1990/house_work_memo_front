@@ -119,7 +119,7 @@ const TopPage: React.FC = () => {
                 House Work Memo
               </Typography>
               <Typography variant='h4' className={classes.subtitle}>
-                毎日の家事を記録しよう。
+                毎日の家事を記録しよう
               </Typography>
             </Container>
           </div>
