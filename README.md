@@ -17,4 +17,7 @@ https://house-work-memo-front.herokuapp.com/
 - 他: axios
 
 ## 機能一覧
-- 家事保存・削除機能
+- 家事保存・削除
+- 作成日降順一覧
+- 作業日降順一覧
+- 分類別集計一覧
