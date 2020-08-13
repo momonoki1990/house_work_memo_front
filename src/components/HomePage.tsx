@@ -177,7 +177,7 @@ const HomePage: React.FC = (props: any) => {
             control={control} name='category' defaultValue='1' className={classes.category}>{categories}</Controller>
         </div>
         <div>
-          <TextField label='時間を入力' variant='outlined' type='number' className={classes.hour} name="hours" inputRef={register({ required: true })}
+          <TextField label='時間を入力' variant='outlined' type='number' className={classes.hour} name="hours" inputProps={{ step: 0.01 }} inputRef={register({ required: true })}
             error={Boolean(errors.hours)} helperText={errors.hours && '必須項目です。'} />
           <Box display='inline-block' className={classes.hour_unit}>時間</Box>
         </div>
